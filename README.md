@@ -16,7 +16,7 @@ cust.head(5)
 ---
 ---
 ### Question no. 1 : How many entries your data have? Can you tell the no. of columns in your data?
-### Answer : We've to know how many entries & how many colmns,datatype,etc. plese follow this code:
+### Answer : We've to know how many entries & how many colmns, how many non null, null, datatype,etc. plese follow this code:
 ```python
 cust.info
 ```
@@ -50,4 +50,61 @@ Data columns (total 20 columns):
 dtypes: float64(1), int64(2), object(17)
 ```
 ---
-
+###Question no. 2 : What are the max and min ages of your customer? Can you find mean of your customer?
+```python
+print('The maximun ages of the customers: ',cust['age'].max())
+print('The minimum ages of the customers: ',cust['age'].min())
+print('The avarege ages of the customers: ',cust['age'].mean().round(2))
+```
+---
+---
+###Question no. 3: What are the three most common customer's names?
+```python
+cust['first'].value_counts().head(3)
+```
+---
+---
+###Question no. 4 : Two customers have the same phone number, can you find those customers?
+```python
+cust.groupby('phone')['first'].count().sort_values(ascending=False).head(1)
+```
+---
+###Question no. 5 :  How many customers have profession "Structural Engineer"?
+```python
+cust[(cust['profession'] == 'Structural Engineer') & (cust['gender'] == 'Male')].count()['first']
+```
+---
+---
+###Question no. 6 : How many 'male' customers are 'Structural Engineer'?
+```python
+cust[(cust['profession'] == 'Structural Engineer') & (cust['gender'] == 'Male')].count()['first']
+```
+---
+---
+###Question no. 7 : Find out the female Structural Engineers from province Alberta (AB)?
+```python
+cust[(cust['profession'] == 'Structural Engineer') & (cust['gender'] == 'Female') & (cust['province'] == 'AB')].count()
+```
+---
+---
+###Question no. 8 : What is the max, min and average spending?
+```python
+print('The maximum spending: ',cust['price(CAD)'].max())
+print('The minimum spending: ',cust['price(CAD)'].min())
+print('The average spending: ',cust['price(CAD)'].mean().round(2))
+```
+---
+---
+###Question no. 9:  Who did not spend anything? Company wants to send a deal to encourage the customer to buy stuff!
+```python
+cust[cust['price(CAD)'] == 0.0]
+```
+---
+---
+#Question no. 10: As a loyalty reward, company wants to send thanks coupon to those who spent 100CAD or more, please find out the customers?
+```python
+cust[cust['price(CAD)'] >= 100.0]
+```
+---
+###
+---
